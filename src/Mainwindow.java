@@ -1,35 +1,4 @@
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.Scanner;
-
-import javax.swing.JCheckBox;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JRadioButton;
-
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.WriterException;
-import com.google.zxing.client.j2se.MatrixToImageWriter;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.oned.Code128Writer;
-import com.google.zxing.qrcode.QRCodeWriter;
-
-import javax.swing.JLabel;
-
-import java.awt.Canvas;
 
 
 public class Mainwindow extends JFrame {
@@ -99,16 +68,19 @@ public class Mainwindow extends JFrame {
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
+		//this thread waits for input
 		Thread th = new Thread(new Runnable(){
 			public void run() {
 				Scanner sc = new Scanner(System.in);
 				while(true){
+				//must check if not in adding case or program is not in error case
 				int x = sc.nextInt();
 				search(x);
 				}
 			}	
 		});
 		th.start();
+		
 		label = new JLabel();
 		label.setBounds(64, 62, 150, 80);
 		panel_1.add(label);
@@ -189,10 +161,14 @@ public class Mainwindow extends JFrame {
 		show();
 	}
 	
-	void make_bar_code(int number){
+	/**
+	 * This function views the Barcode image for a given barcode.
+	 * @param barcode
+	 */
+	void make_bar_code(int barcode){
 		BitMatrix bitMatrix = null;
 		try {
-		    bitMatrix = new Code128Writer().encode(String.valueOf(number), BarcodeFormat.CODE_128, 150, 80, null);
+		    bitMatrix = new Code128Writer().encode(String.valueOf(barcode), BarcodeFormat.CODE_128, 150, 80, null);
 		    image = MatrixToImageWriter.toBufferedImage(bitMatrix);
 		    } catch (WriterException e){
 		        e.printStackTrace();
@@ -200,12 +176,18 @@ public class Mainwindow extends JFrame {
 		label.setIcon(new ImageIcon(image));
 	}
 	
-	private void search(int value) {
+	/**
+	 * This function search for barcode in files
+	 * If found an element view it
+	 * else open a window to register new element
+	 * @param barcode
+	 */
+	private void search(int barcode) {
 		boolean found = false;
 		if(found){
-			view(value);
+			view(barcode);
 		}else{
-			make_bar_code(value);
+			make_bar_code(barcode);
 			panel.hide();
 			panel_3.show();
 		}
@@ -215,7 +197,11 @@ public class Mainwindow extends JFrame {
 		
 	}
 	
-	private void view(int value){
+	/**
+	 * This function initialzie the view panel with the element data of the given barcode.
+	 * @param barcode
+	 */
+	private void view(int barcode){
 		
 	}
 }
