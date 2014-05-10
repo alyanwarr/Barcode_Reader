@@ -139,7 +139,7 @@ public class Mainwindow extends JFrame {
 		rdbtnStepB.setBounds(55, 247, 109, 23);
 		panel_3.add(rdbtnStepB);
 		
-		JRadioButton rdbtnStepB_1 = new JRadioButton("step B");
+		JRadioButton rdbtnStepB_1 = new JRadioButton("step C");
 		rdbtnStepB_1.setBounds(55, 273, 109, 23);
 		panel_3.add(rdbtnStepB_1);
 		
