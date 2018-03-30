@@ -26,7 +26,7 @@ import com.google.zxing.oned.Code128Writer;
 
 public class Mainwindow extends JFrame {
 	private JTextField barCodeText;
-	private int newrakam;
+	private int newnum;
 	private BufferedImage image;
 	private JFrame parent;
 	private JPanel panel;
@@ -123,7 +123,7 @@ public class Mainwindow extends JFrame {
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				add();
-				search(newrakam);
+				search(newnum);
 				panel.show();
 				panel_3.hide();
 				label.setIcon(null);
@@ -153,7 +153,7 @@ public class Mainwindow extends JFrame {
 		rdbtnStepB.setBounds(55, 247, 109, 23);
 		panel_3.add(rdbtnStepB);
 
-		rdbtnStepC = new JRadioButton("step B");
+		rdbtnStepC = new JRadioButton("step C");
 		rdbtnStepC.setBounds(55, 273, 109, 23);
 		panel_3.add(rdbtnStepC);
 
@@ -219,12 +219,12 @@ public class Mainwindow extends JFrame {
 				valueOfBarCodeText = barCodeText.getText();
 				if (valueOfBarCodeText != null) {
 					try {
-						newrakam=Integer.parseInt(valueOfBarCodeText);
-						search(newrakam);
+						newnum=Integer.parseInt(valueOfBarCodeText);
+						search(newnum);
 						barCodeText.setText("");
 					} catch (Exception ex) {
 						// this mean that the input was not a number
-						System.out.println("wrong entery");
+						System.out.println("wrong entry");
 						barCodeText.setText("");
 					}
 
@@ -258,8 +258,8 @@ public class Mainwindow extends JFrame {
 				while (true) {
 					// must check if not in adding case or program is not in
 					// error case
-					newrakam = sc.nextInt();
-					search(newrakam);
+					newnum = sc.nextInt();
+					search(newnum);
 				}
 			}
 		});
@@ -359,10 +359,10 @@ public class Mainwindow extends JFrame {
 	}
 
 	private void add() {
-		System.out.println(newrakam);
+		System.out.println(newnum);
 		Data temp = new Data();
 		String choice = null;
-		temp.setGeneratedNumber(newrakam);
+		temp.setGeneratedNumber(newnum);
 		temp.setPackageData(textField_1.getText());
 		temp.setDataSent(textField_2.getText());
 		temp.setRecievedData(textField_3.getText());
